@@ -20,7 +20,7 @@ typedef int BOOL;
 #define TURN "TURN"
 #define END "END"
 
-//ÎÒÊÇ0£¬¶Ô·½ÊÇ1 
+//æˆ‘æ˜¯0ï¼Œå¯¹æ–¹æ˜¯1 
 struct Command
 {
     int x[MAX_STEP];
@@ -100,11 +100,11 @@ void rotateCommand(struct Command *cmd)
     }
 }
 
-int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯ 
+int tryToMove(int x, int y)//æœç´¢ç§»åŠ¨ 
 {
 	int singleCheckMoveNum=0;
     int newX, newY;
-    if(board[x][y]==MY_FLAG)//ÎÒ·½±øÆå£¬×óÏÂ£¬ÓÒÏÂÁ½¸ö·½Ïò 
+    if(board[x][y]==MY_FLAG)//æˆ‘æ–¹å…µæ£‹ï¼Œå·¦ä¸‹ï¼Œå³ä¸‹ä¸¤ä¸ªæ–¹å‘ 
 	    for (int i = 0; i < 2; i++)
 	    {
 	        newX = x + moveDir[i][0];
@@ -118,7 +118,7 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	            allMoveCmd[singleCheckMoveNum++]=moveCmd;
 	        }
 	    }
-	if(board[x][y]==ENEMY_FLAG)//µĞ·½±øÆå£¬×óÉÏ£¬ÓÒÉÏÁ½¸ö·½Ïò 
+	if(board[x][y]==ENEMY_FLAG)//æ•Œæ–¹å…µæ£‹ï¼Œå·¦ä¸Šï¼Œå³ä¸Šä¸¤ä¸ªæ–¹å‘ 
 	    for (int i = 0; i < 2; i++)
 	    {
 	        newX = x + moveDir[2+i][0]; 
@@ -132,7 +132,7 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	            allMoveCmd[singleCheckMoveNum++]=moveCmd;
 	        }
 	    }
-	 if(board[x][y]==MY_KING||board[x][y]==ENEMY_KING)//Ë«·½ÍõÆå£¬ËÄ¸ö·½ÏòÈ«²¿ËÑË÷ 
+	 if(board[x][y]==MY_KING||board[x][y]==ENEMY_KING)//åŒæ–¹ç‹æ£‹ï¼Œå››ä¸ªæ–¹å‘å…¨éƒ¨æœç´¢ 
 	    for (int i = 0; i < 4; i++)
 	    {
 	        newX = x + moveDir[i][0];
@@ -146,12 +146,12 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	           	allMoveCmd[singleCheckMoveNum++]=moveCmd;
 	        }
 	    }
-    return singleCheckMoveNum;//·µ»Øµ¥¸öÆå×ÓÒÆ¶¯Ñ¡Ôñ¸öÊı 
+    return singleCheckMoveNum;//è¿”å›å•ä¸ªæ£‹å­ç§»åŠ¨é€‰æ‹©ä¸ªæ•° 
 }
 
-/*ÌøÔ¾³Ô×Ó²¿·Ö*/ 
+/*è·³è·ƒåƒå­éƒ¨åˆ†*/ 
 
-int getBitwise(int player,int mode)//µÃµ½Î»ÔËËãÊ±µÄ²ÎÊı 
+int getBitwise(int player,int mode)//å¾—åˆ°ä½è¿ç®—æ—¶çš„å‚æ•° 
 {
 	if(mode==1)
 	{
@@ -167,7 +167,7 @@ int getBitwise(int player,int mode)//µÃµ½Î»ÔËËãÊ±µÄ²ÎÊı
 	}
 }
 
-void tryToJump(int x, int y, int currentStep,int player)//ËÑË÷µ¥¸öÆå×ÓµÄ³Ô×Ó×î³¤Â·¾¶,½á¹û±£´æÔÚ 
+void tryToJump(int x, int y, int currentStep,int player)//æœç´¢å•ä¸ªæ£‹å­çš„åƒå­æœ€é•¿è·¯å¾„,ç»“æœä¿å­˜åœ¨ 
 {
 	int bitwise=getBitwise(player,1);
     int newX, newY, midX, midY;
@@ -186,14 +186,14 @@ void tryToJump(int x, int y, int currentStep,int player)//ËÑË÷µ¥¸öÆå×ÓµÄ³Ô×Ó×î³¤
             board[newX][newY] = board[x][y];
             board[x][y] = EMPTY;
             tmpFlag = board[midX][midY];
-            board[midX][midY] = EMPTY;//½«Ìø¹ıÆå×ÓÉèÎªempty£¬·ÀÖ¹ÖØÌø 
+            board[midX][midY] = EMPTY;//å°†è·³è¿‡æ£‹å­è®¾ä¸ºemptyï¼Œé˜²æ­¢é‡è·³ 
             tryToJump(newX, newY, currentStep + 1,player);
-            board[x][y] = board[newX][newY];//¸´Ô­ 
+            board[x][y] = board[newX][newY];//å¤åŸ 
             board[newX][newY] = EMPTY;
             board[midX][midY] = tmpFlag;
         }
     }
-    if (jumpCmd.numStep > longestJumpCmd.numStep)//È¡×î³¤Â·¾¶ 
+    if (jumpCmd.numStep > longestJumpCmd.numStep)//å–æœ€é•¿è·¯å¾„ 
     {
         memcpy(&longestJumpCmd, &jumpCmd, sizeof(struct Command));
     }
@@ -207,7 +207,7 @@ int getLongestJumpStep(int player)
 	int maxStep = 1;
 	longestJumpCmd.numStep = 1;
 	for(int i=0;i<BOARD_SIZE;i++)
-		for(int j=0;j<BOARD_SIZE;j++)//ÏÈ±éÀúÆåÅÌµÃµ½×î³¤£¬ÓĞ¶à³Ô¶à 
+		for(int j=0;j<BOARD_SIZE;j++)//å…ˆéå†æ£‹ç›˜å¾—åˆ°æœ€é•¿ï¼Œæœ‰å¤šåƒå¤š 
 		{
 			if (board[i][j] > 0 && (board[i][j] & 1) == bitwise)
 			{
@@ -256,12 +256,12 @@ void getSingleCheckJumpCmd(int x, int y, int currentStep,int player)
     singlejumpCmd.numStep--;
 }
 
-int getJumpCmd(int player)//ËÑË÷È«²¿Æå×ÓµÄÌøÔ¾
+int getJumpCmd(int player)//æœç´¢å…¨éƒ¨æ£‹å­çš„è·³è·ƒ
 {
 	int numChecked=0; 
 	int bitwise=getBitwise(player,2);
 	int jumpCmdNum=0;
-	if(maxJumpStepNum==1)//ÎŞ³Ô×ÓÑ¡Ôñ£¬·µ»Ø0 
+	if(maxJumpStepNum==1)//æ— åƒå­é€‰æ‹©ï¼Œè¿”å›0 
 		return 0;
 	else
 	{
@@ -279,13 +279,13 @@ int getJumpCmd(int player)//ËÑË÷È«²¿Æå×ÓµÄÌøÔ¾
 							allJumpCmd[jumpCmdNum++]=singleCheckJumpCmd[i];
 		        }	
 				if(numChecked>=numFlag[player])
-		        	return jumpCmdNum;	//·µ»ØÈ«¾ÖÄ³Ò»·½³Ô×ÓÑ¡Ôñ
+		        	return jumpCmdNum;	//è¿”å›å…¨å±€æŸä¸€æ–¹åƒå­é€‰æ‹©
 			}
 	}
 }
 
 
-int getCmd(int player)//0ÊÇÎÒ£¬1ÊÇµĞ·½£¬getCmdº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄËùÓĞ¿É×ßÑ¡Ôñ·ÅÔÚallCmd[]Êı×éÀï£¬²¢·µ»Ø¿É×ßÑ¡ÔñµÄ¸öÊı 
+int getCmd(int player)//0æ˜¯æˆ‘ï¼Œ1æ˜¯æ•Œæ–¹ï¼ŒgetCmdå‡½æ•°çš„åŠŸèƒ½æ˜¯æŠŠæŸä¸€æ–¹çš„æ‰€æœ‰å¯èµ°é€‰æ‹©æ”¾åœ¨allCmd[]æ•°ç»„é‡Œï¼Œå¹¶è¿”å›å¯èµ°é€‰æ‹©çš„ä¸ªæ•° 
 {
 	maxJumpStepNum=getLongestJumpStep(player);
 	int bitwise=getBitwise(player,2);
@@ -295,7 +295,7 @@ int getCmd(int player)//0ÊÇÎÒ£¬1ÊÇµĞ·½£¬getCmdº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄËùÓĞ¿É×ßÑ¡Ôñ
 	{
 		for(int i=0;i<jumpCmdNum;i++)
 			allCmd[cmdNum++]=allJumpCmd[i];
-		return cmdNum;//ÓĞ³Ô±Ø³Ô 
+		return cmdNum;//æœ‰åƒå¿…åƒ 
 	}
 	else
 	{
@@ -304,7 +304,7 @@ int getCmd(int player)//0ÊÇÎÒ£¬1ÊÇµĞ·½£¬getCmdº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄËùÓĞ¿É×ßÑ¡Ôñ
 		    {
 		        for (int j = 0; j < BOARD_SIZE; j++)
 		        {
-		            if (board[i][j] > 0 && (board[i][j] & 1) == bitwise)//±éÀúÆåÅÌËÑË÷ÒÆ¶¯Ñ¡Ôñ 
+		            if (board[i][j] > 0 && (board[i][j] & 1) == bitwise)//éå†æ£‹ç›˜æœç´¢ç§»åŠ¨é€‰æ‹© 
 		            {
 		            	numChecked++;
 		                if (tryToMove(i, j) > 0)
@@ -359,9 +359,9 @@ void place(struct Command cmd)
     }
 }
 
-/*Ëã·¨²¿·Ö*/ 
+/*ç®—æ³•éƒ¨åˆ†*/ 
 
-void cpyNumFlag(int tmpNumFlag[2],int mode)//Æå×ÓÊıÁ¿¸´ÖÆº¯Êı 
+void cpyNumFlag(int tmpNumFlag[2],int mode)//æ£‹å­æ•°é‡å¤åˆ¶å‡½æ•° 
 {
 	if(mode==0)
 	{
@@ -375,20 +375,20 @@ void cpyNumFlag(int tmpNumFlag[2],int mode)//Æå×ÓÊıÁ¿¸´ÖÆº¯Êı
 	}
 }
 
-void cpyCheck(char desBoard[BOARD_SIZE][BOARD_SIZE],char iniBoard[BOARD_SIZE][BOARD_SIZE])//Æå×Ó¸´ÖÆº¯Êı
+void cpyCheck(char desBoard[BOARD_SIZE][BOARD_SIZE],char iniBoard[BOARD_SIZE][BOARD_SIZE])//æ£‹å­å¤åˆ¶å‡½æ•°
 {
 	for(int i=0;i<BOARD_SIZE;i++)
 		for(int j=0;j<BOARD_SIZE;j++)
 			desBoard[i][j]=iniBoard[i][j];
 } 
 
-void cpyBoard(char desBoard[BOARD_SIZE][BOARD_SIZE],char iniBoard[BOARD_SIZE][BOARD_SIZE],int tmpNumFlag[2],int mode)//ÆåÅÌ¸´ÖÆº¯Êı 
+void cpyBoard(char desBoard[BOARD_SIZE][BOARD_SIZE],char iniBoard[BOARD_SIZE][BOARD_SIZE],int tmpNumFlag[2],int mode)//æ£‹ç›˜å¤åˆ¶å‡½æ•° 
 {
 	cpyCheck(desBoard,iniBoard);
 	cpyNumFlag(tmpNumFlag,mode);
 }
 
-int evaluation()//¹ÀÖµº¯Êı 
+int evaluation()//ä¼°å€¼å‡½æ•° 
 {
 	int score=0;
 	for(int i=0;i<BOARD_SIZE;i++)
@@ -412,7 +412,7 @@ void initAI(int me)
 	numFlag[1]=12;
 }
 
-int minimax(int currentDepth,int depth)//¼«´ó¼«Ğ¡ËÑË÷ 
+int minimax(int currentDepth,int depth)//æå¤§æå°æœç´¢ 
 {
 	int valuation=0;
  	int upperDepthValuation=0; 
@@ -449,7 +449,7 @@ int minimax(int currentDepth,int depth)//¼«´ó¼«Ğ¡ËÑË÷
 			if(currentDepth%2==0)
 			{
 				upperDepthValuation=minimax(currentDepth+1,depth);
-				if(upperDepthValuation>valuation&&currentDepth==0)//ÔÚµÚ0²ã·µ»ØbestCommand 
+				if(upperDepthValuation>valuation&&currentDepth==0)//åœ¨ç¬¬0å±‚è¿”å›bestCommand 
 					bestCommand=allCommand[i];
 				valuation=upperDepthValuation>valuation?upperDepthValuation:valuation;
 			}
