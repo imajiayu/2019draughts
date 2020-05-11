@@ -23,7 +23,7 @@ typedef int BOOL;
 #define PLACE "PLACE"
 #define TURN "TURN"
 #define END "END"
-//ÎÒÊÇ1£¬¶Ô·½ÊÇ2 
+//æˆ‘æ˜¯1ï¼Œå¯¹æ–¹æ˜¯2 
 struct Command
 {
     int x[MAX_STEP];
@@ -103,11 +103,11 @@ void rotateCommand(struct Command *cmd)
     }
 }
 
-int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯ 
+int tryToMove(int x, int y)//æœç´¢ç§»åŠ¨ 
 {
 	int singlecheckmovenum=0;
     int newX, newY;
-    if(board[x][y]==MY_FLAG)//ÎÒ·½±øÆå£¬×óÏÂ£¬ÓÒÏÂÁ½¸ö·½Ïò 
+    if(board[x][y]==MY_FLAG)//æˆ‘æ–¹å…µæ£‹ï¼Œå·¦ä¸‹ï¼Œå³ä¸‹ä¸¤ä¸ªæ–¹å‘ 
 	    for (int i = 0; i < 2; i++)
 	    {
 	        newX = x + moveDir[i][0];
@@ -121,7 +121,7 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	            allmoveCmd[singlecheckmovenum++]=moveCmd;
 	        }
 	    }
-	if(board[x][y]==ENEMY_FLAG)//µĞ·½±øÆå£¬×óÉÏ£¬ÓÒÉÏÁ½¸ö·½Ïò 
+	if(board[x][y]==ENEMY_FLAG)//æ•Œæ–¹å…µæ£‹ï¼Œå·¦ä¸Šï¼Œå³ä¸Šä¸¤ä¸ªæ–¹å‘ 
 	    for (int i = 0; i < 2; i++)
 	    {
 	        newX = x + moveDir[2+i][0]; 
@@ -135,7 +135,7 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	            allmoveCmd[singlecheckmovenum++]=moveCmd;
 	        }
 	    }
-	 if(board[x][y]==MY_KING||board[x][y]==ENEMY_KING)//Ë«·½ÍõÆå£¬ËÄ¸ö·½ÏòÈ«²¿ËÑË÷ 
+	 if(board[x][y]==MY_KING||board[x][y]==ENEMY_KING)//åŒæ–¹ç‹æ£‹ï¼Œå››ä¸ªæ–¹å‘å…¨éƒ¨æœç´¢ 
 	    for (int i = 0; i < 4; i++)
 	    {
 	        newX = x + moveDir[i][0];
@@ -149,10 +149,10 @@ int tryToMove(int x, int y)//ËÑË÷ÒÆ¶¯
 	           	allmoveCmd[singlecheckmovenum++]=moveCmd;
 	        }
 	    }
-    return singlecheckmovenum;//·µ»Øµ¥¸öÆå×ÓÒÆ¶¯Ñ¡Ôñ¸öÊı 
+    return singlecheckmovenum;//è¿”å›å•ä¸ªæ£‹å­ç§»åŠ¨é€‰æ‹©ä¸ªæ•° 
 }
 
-int tryToJump(int x, int y, int currentStep,int player)//ËÑË÷µ¥¸öÆå×ÓµÄ³Ô×Ó×î³¤Â·¾¶ 
+int tryToJump(int x, int y, int currentStep,int player)//æœç´¢å•ä¸ªæ£‹å­çš„åƒå­æœ€é•¿è·¯å¾„ 
 {
 	int t;
 	if(player==1)
@@ -174,14 +174,14 @@ int tryToJump(int x, int y, int currentStep,int player)//ËÑË÷µ¥¸öÆå×ÓµÄ³Ô×Ó×î³¤Â
             board[newX][newY] = board[x][y];
             board[x][y] = EMPTY;
             tmpFlag = board[midX][midY];
-            board[midX][midY] = EMPTY;//½«Ìø¹ıÆå×ÓÉèÎªempty£¬·ÀÖ¹ÖØÌø 
+            board[midX][midY] = EMPTY;//å°†è·³è¿‡æ£‹å­è®¾ä¸ºemptyï¼Œé˜²æ­¢é‡è·³ 
             tryToJump(newX, newY, currentStep + 1,player);
-            board[x][y] = board[newX][newY];//¸´Ô­ 
+            board[x][y] = board[newX][newY];//å¤åŸ 
             board[newX][newY] = EMPTY;
             board[midX][midY] = tmpFlag;
         }
     }
-    if (jumpCmd.numStep > longestJumpCmd.numStep)//È¡×î³¤Â·¾¶ 
+    if (jumpCmd.numStep > longestJumpCmd.numStep)//å–æœ€é•¿è·¯å¾„ 
     {
         memcpy(&longestJumpCmd, &jumpCmd, sizeof(struct Command));
     }
@@ -199,7 +199,7 @@ int getlongestjumpcmdnum(int player)
 	int maxStep = 1;
 	longestJumpCmd.numStep = 1;
 	for(int i=0;i<BOARD_SIZE;i++)
-		for(int j=0;j<BOARD_SIZE;j++)//ÏÈ±éÀúÆåÅÌµÃµ½×î³¤£¬ÓĞ¶à³Ô¶à 
+		for(int j=0;j<BOARD_SIZE;j++)//å…ˆéå†æ£‹ç›˜å¾—åˆ°æœ€é•¿ï¼Œæœ‰å¤šåƒå¤š 
 		{
 			if (board[i][j] > 0 && (board[i][j] & 1) == k)
 			{
@@ -254,7 +254,7 @@ void searchsinglecheckjump(int x, int y, int currentStep,int player)
     singlejumpCmd.numStep--;
 }
 
-int searchjump(int player)//ËÑË÷È«²¿Æå×ÓµÄÌøÔ¾
+int searchjump(int player)//æœç´¢å…¨éƒ¨æ£‹å­çš„è·³è·ƒ
 {
 	int numchecked=0; 
 	int k;
@@ -262,7 +262,7 @@ int searchjump(int player)//ËÑË÷È«²¿Æå×ÓµÄÌøÔ¾
 		k=0;
 	else k=1;
 	int jumpnum1=0;
-	if(MaxStep==1)//ÎŞ³Ô×ÓÑ¡Ôñ£¬·µ»Ø0 
+	if(MaxStep==1)//æ— åƒå­é€‰æ‹©ï¼Œè¿”å›0 
 		return 0;
 	else
 	{
@@ -280,12 +280,12 @@ int searchjump(int player)//ËÑË÷È«²¿Æå×ÓµÄÌøÔ¾
 							alljumpCmd[jumpnum1++]=singlecheckjumpcmd[i];
 		        }	
 				if(numchecked>=numFlag[player])
-		        	return jumpnum1;	//·µ»ØÈ«¾ÖÄ³Ò»·½³Ô×ÓÑ¡Ôñ
+		        	return jumpnum1;	//è¿”å›å…¨å±€æŸä¸€æ–¹åƒå­é€‰æ‹©
 			}
 	}
 }
 
-int search(int player)//player1ÊÇÎÒ£¬player2ÊÇµĞ·½£¬searchº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄËùÓĞ¿É×ßÑ¡Ôñ·ÅÔÚallcommand[]Êı×éÀï£¬²¢·µ»Ø ¿É×ßÑ¡ÔñµÄ¸öÊı 
+int search(int player)//player1æ˜¯æˆ‘ï¼Œplayer2æ˜¯æ•Œæ–¹ï¼Œsearchå‡½æ•°çš„åŠŸèƒ½æ˜¯æŠŠæŸä¸€æ–¹çš„æ‰€æœ‰å¯èµ°é€‰æ‹©æ”¾åœ¨allcommand[]æ•°ç»„é‡Œï¼Œå¹¶è¿”å› å¯èµ°é€‰æ‹©çš„ä¸ªæ•° 
 {
 	MaxStep=getlongestjumpcmdnum(player);
 	int t;
@@ -294,7 +294,7 @@ int search(int player)//player1ÊÇÎÒ£¬player2ÊÇµĞ·½£¬searchº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄ
 	else t=1;
 	int cmdnum=0;
 	int jumpnum=searchjump(player);
-	if(jumpnum!=0)//ÓĞ³Ô±Ø³Ô 
+	if(jumpnum!=0)//æœ‰åƒå¿…åƒ 
 	{
 		for(int i=0;i<jumpnum;i++)
 			allcommand[cmdnum++]=alljumpCmd[i];
@@ -307,7 +307,7 @@ int search(int player)//player1ÊÇÎÒ£¬player2ÊÇµĞ·½£¬searchº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄ
 		    {
 		        for (int j = 0; j < BOARD_SIZE; j++)
 		        {
-		            if (board[i][j] > 0 && (board[i][j] & 1) == t)//±éÀúÆåÅÌËÑË÷ÒÆ¶¯Ñ¡Ôñ 
+		            if (board[i][j] > 0 && (board[i][j] & 1) == t)//éå†æ£‹ç›˜æœç´¢ç§»åŠ¨é€‰æ‹© 
 		            {
 		            	numchecked++;
 		                if (tryToMove(i, j) > 0)
@@ -364,7 +364,7 @@ void place(struct Command cmd)
 
 
 
-void cpynumFlag(int depth1,int depth2)//Æì×ÓÊıÁ¿¸´ÖÆº¯Êı 
+void cpynumFlag(int depth1,int depth2)//æ——å­æ•°é‡å¤åˆ¶å‡½æ•° 
 {
 	if(depth2==1)
 	{
@@ -382,11 +382,11 @@ void cpyboard(char desboard[BOARD_SIZE][BOARD_SIZE],char iniboard[BOARD_SIZE][BO
 	for(int i=0;i<BOARD_SIZE;i++)
 		for(int j=0;j<BOARD_SIZE;j++)
 			desboard[i][j]=iniboard[i][j];
-} //ÆåÅÌ¸´ÖÆº¯Êı 
+} //æ£‹ç›˜å¤åˆ¶å‡½æ•° 
 
 
 
-float value(char currentboard[BOARD_SIZE][BOARD_SIZE])//¹ÀÖµº¯Êı 
+float value(char currentboard[BOARD_SIZE][BOARD_SIZE])//ä¼°å€¼å‡½æ•° 
 {
 	float valuation=0;
 	for(int i=0;i<BOARD_SIZE;i++)
@@ -413,7 +413,7 @@ void initAI(int me)
 	numFlag[2]=12;
 }
 
-struct Command minimax()//¼«´ó¼«Ğ¡ 
+struct Command minimax()//æå¤§æå° 
 {
 	int numstep[8];
 	char tempboard0[BOARD_SIZE][BOARD_SIZE];
@@ -431,14 +431,14 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 	struct Command allmycommand4[20];
 	struct Command allenemycommand5[20];
 	struct Command allmycommand6[20];
-	//¼«´ó¼«Ğ¡¿ªÊ¼
+	//æå¤§æå°å¼€å§‹
 	cpyboard(tempboard0,board);
 	cpynumFlag(0,1);
 	numstep[0]=search(1);
 	int maxvaluation0=-10000;
 	for(int i=0;i<numstep[0];i++)
 		allmycommand0[i]=allcommand[i];
-	for(int step0=0;step0<numstep[0];step0++)//µÚÒ»²ã 
+	for(int step0=0;step0<numstep[0];step0++)//ç¬¬ä¸€å±‚ 
 	{
 		place(allmycommand0[step0]);
 		cpyboard(tempboard1,board);
@@ -447,7 +447,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 		int minvaluation1=10000;
 		for(int i=0;i<numstep[1];i++)
 			allenemycommand1[i]=allcommand[i];
-		for(int step1=0;step1<numstep[1];step1++)//µÚ¶ş²ã 
+		for(int step1=0;step1<numstep[1];step1++)//ç¬¬äºŒå±‚ 
 		{
 			place(allenemycommand1[step1]);
 			cpyboard(tempboard2,board);
@@ -456,7 +456,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 			int maxvaluation2=-10000;
 			for(int i=0;i<numstep[2];i++)
 				allmycommand2[i]=allcommand[i];
-			for(int step2=0;step2<numstep[2];step2++)//µÚÈı²ã 
+			for(int step2=0;step2<numstep[2];step2++)//ç¬¬ä¸‰å±‚ 
 			{
 				place(allmycommand2[step2]);
 				cpyboard(tempboard3,board);
@@ -465,7 +465,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 				int minvaluation3=10000;
 				for(int i=0;i<numstep[3];i++)
 					allenemycommand3[i]=allcommand[i];
-				for(int step3=0;step3<numstep[3];step3++)//µÚËÄ²ã
+				for(int step3=0;step3<numstep[3];step3++)//ç¬¬å››å±‚
 				{
 					place(allenemycommand3[step3]);
 					cpyboard(tempboard4,board);
@@ -474,7 +474,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 					int maxvaluation4=-10000;
 					for(int i=0;i<numstep[4];i++)
 						allmycommand4[i]=allcommand[i];
-					for(int step4=0;step4<numstep[4];step4++)//µÚÎå²ã
+					for(int step4=0;step4<numstep[4];step4++)//ç¬¬äº”å±‚
 					{
 						place(allmycommand4[step4]);
 						cpyboard(tempboard5,board);
@@ -483,7 +483,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 						int minvaluation5=10000;
 						for(int i=0;i<numstep[5];i++)
 							allenemycommand5[i]=allcommand[i];
-						for(int step5=0;step5<numstep[5];step5++)//µÚÁù²ã 
+						for(int step5=0;step5<numstep[5];step5++)//ç¬¬å…­å±‚ 
 						{
 							place(allenemycommand5[step5]);
 							cpyboard(tempboard6,board);
@@ -492,7 +492,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 							int maxvaluation6=-10000;
 							for(int i=0;i<numstep[6];i++)
 								allmycommand6[i]=allcommand[i];
-							for(int step6=0;step6<numstep[6];step6++)//µÚÆß²ã 
+							for(int step6=0;step6<numstep[6];step6++)//ç¬¬ä¸ƒå±‚ 
 							{
 								place(allmycommand6[step6]);
 								if(value(board)>maxvaluation6)
