@@ -210,16 +210,16 @@ void place(struct Command cmd)
 
 /**
  * YOUR CODE BEGIN
- * ÄãµÄ´úÂë¿ªÊ¼
+ * ä½ çš„ä»£ç å¼€å§‹
  */
 
 /**
  * You can define your own struct and variable here
- * Äã¿ÉÒÔÔÚÕâÀï¶¨ÒåÄã×Ô¼ºµÄ½á¹¹ÌåºÍ±äÁ¿
+ * ä½ å¯ä»¥åœ¨è¿™é‡Œå®šä¹‰ä½ è‡ªå·±çš„ç»“æ„ä½“å’Œå˜é‡
  */
 
 /**
- * Äã¿ÉÒÔÔÚÕâÀï³õÊ¼»¯ÄãµÄAI
+ * ä½ å¯ä»¥åœ¨è¿™é‡Œåˆå§‹åŒ–ä½ çš„AI
  */
  
  
@@ -246,9 +246,9 @@ int value(char board[BOARD_SIZE][BOARD_SIZE])
 			}	
 		}
 	return valuation;
-} //¹ÀÖµº¯Êı£¬ÒÔµĞÎÒ±øÆå¸öÊıºÍÍõÆå¸öÊıÎª²ÎÊı 
+} //ä¼°å€¼å‡½æ•°ï¼Œä»¥æ•Œæˆ‘å…µæ£‹ä¸ªæ•°å’Œç‹æ£‹ä¸ªæ•°ä¸ºå‚æ•° 
 
-char tempboard[BOARD_SIZE][BOARD_SIZE];//aiTURN ÀïµÄÆåÅÌÊÇconstĞÍ£¬ÎŞ·¨¸Ä±ä£¬ËùÒÔ¶¨ÒåÒ»¸öÁÙÊ±ÆåÅÌ 
+char tempboard[BOARD_SIZE][BOARD_SIZE];//aiTURN é‡Œçš„æ£‹ç›˜æ˜¯constå‹ï¼Œæ— æ³•æ”¹å˜ï¼Œæ‰€ä»¥å®šä¹‰ä¸€ä¸ªä¸´æ—¶æ£‹ç›˜ 
 
 
 void cpyboard(const char board[BOARD_SIZE][BOARD_SIZE],char desboard[BOARD_SIZE][BOARD_SIZE])
@@ -256,7 +256,7 @@ void cpyboard(const char board[BOARD_SIZE][BOARD_SIZE],char desboard[BOARD_SIZE]
 	for(int i=0;i<BOARD_SIZE;i++)
 		for(int j=0;j<BOARD_SIZE;j++)
 			desboard[i][j]=board[i][j];
-}//ÆåÅÌ¸´ÖÆº¯Êı 
+}//æ£‹ç›˜å¤åˆ¶å‡½æ•° 
 
 void tempplace(struct Command cmd)
 {
@@ -289,7 +289,7 @@ void tempplace(struct Command cmd)
             tempboard[BOARD_SIZE - 1][i] = MY_KING;
         }
     }
-}//ÁÙÊ±·ÅÖÃÆå×ÓµÄº¯Êı£¬ÓÃÀ´¸Ä±äÁÙÊ±ÆåÅÌµÄ¾ÖÃæ 
+}//ä¸´æ—¶æ”¾ç½®æ£‹å­çš„å‡½æ•°ï¼Œç”¨æ¥æ”¹å˜ä¸´æ—¶æ£‹ç›˜çš„å±€é¢ 
 
 void initAI(int me)
 {
@@ -297,16 +297,16 @@ void initAI(int me)
 }
 
 /**
- * ÂÖµ½ÄãÂä×Ó¡£
- * ÆåÅÌÉÏ0±íÊ¾¿Õ°×£¬1±íÊ¾ºÚÆå£¬2±íÊ¾°×Æì
- * me±íÊ¾ÄãËù´ú±íµÄÆå×Ó(1»ò2)
- * ÄãĞèÒª·µ»ØÒ»¸ö½á¹¹ÌåCommand£¬ÆäÖĞnumStepÊÇÄãÒªÒÆ¶¯µÄÆå×Ó¾­¹ıµÄ¸ñ×ÓÊı£¨º¬Æğµã¡¢ÖÕµã£©£¬
- * x¡¢y·Ö±ğÊÇ¸ÃÆå×ÓÒÀ´Î¾­¹ıµÄÃ¿¸ö¸ñ×ÓµÄºá¡¢×İ×ø±ê
+ * è½®åˆ°ä½ è½å­ã€‚
+ * æ£‹ç›˜ä¸Š0è¡¨ç¤ºç©ºç™½ï¼Œ1è¡¨ç¤ºé»‘æ£‹ï¼Œ2è¡¨ç¤ºç™½æ——
+ * meè¡¨ç¤ºä½ æ‰€ä»£è¡¨çš„æ£‹å­(1æˆ–2)
+ * ä½ éœ€è¦è¿”å›ä¸€ä¸ªç»“æ„ä½“Commandï¼Œå…¶ä¸­numStepæ˜¯ä½ è¦ç§»åŠ¨çš„æ£‹å­ç»è¿‡çš„æ ¼å­æ•°ï¼ˆå«èµ·ç‚¹ã€ç»ˆç‚¹ï¼‰ï¼Œ
+ * xã€yåˆ†åˆ«æ˜¯è¯¥æ£‹å­ä¾æ¬¡ç»è¿‡çš„æ¯ä¸ªæ ¼å­çš„æ¨ªã€çºµåæ ‡
  */
 struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 {
     /*
-     * TODO£ºÔÚÕâÀïĞ´ÏÂÄãµÄAI¡£
+     * TODOï¼šåœ¨è¿™é‡Œå†™ä¸‹ä½ çš„AIã€‚
      */
     int maxvaluation=0;
     struct Command bestcommand;
@@ -322,7 +322,7 @@ struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 	    {
 	        for (int j = 0; j < BOARD_SIZE; j++)
 	        {
-	        	cpyboard(board,tempboard);//Ã¿Ò»´Î¶¼½«Ô­Ê¼ÆåÅÌ´«ÈëÁÙÊ±ÆåÅÌ 
+	        	cpyboard(board,tempboard);//æ¯ä¸€æ¬¡éƒ½å°†åŸå§‹æ£‹ç›˜ä¼ å…¥ä¸´æ—¶æ£‹ç›˜ 
 	            if (board[i][j] > 0 && (board[i][j] & 1) == 0)
 	            {
 	                numChecked++;
@@ -340,9 +340,9 @@ struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 	                    }
 	                }
 	            }
-	            tempplace(command); //ÏÈÔÚÁÙÊ±ÆåÅÌÖĞÖ´ĞĞÃüÁî
+	            tempplace(command); //å…ˆåœ¨ä¸´æ—¶æ£‹ç›˜ä¸­æ‰§è¡Œå‘½ä»¤
 				printfboard(tempboard); 
-        		if(value(tempboard)>=maxvaluation)//¹ÀÖµ£¬È¡×îÓÅÃüÁî 
+        		if(value(tempboard)>=maxvaluation)//ä¼°å€¼ï¼Œå–æœ€ä¼˜å‘½ä»¤ 
 		        {
 		        	maxvaluation=value(tempboard);
 		        	memcpy(&bestcommand, &command, sizeof(struct Command));
@@ -355,7 +355,7 @@ struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 }
 
 /**
- * ÄãµÄ´úÂë½áÊø
+ * ä½ çš„ä»£ç ç»“æŸ
  */
 
 //.X.X.X.X
