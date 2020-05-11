@@ -23,7 +23,7 @@ typedef int BOOL;
 #define PLACE "PLACE"
 #define TURN "TURN"
 #define END "END"
-//ÎÒÊÇ1£¬¶Ô·½ÊÇ2 
+//æˆ‘æ˜¯1ï¼Œå¯¹æ–¹æ˜¯2 
 struct Command
 {
     int x[MAX_STEP];
@@ -269,7 +269,7 @@ int searchjump(int player)
 		}
 	return num;				
 }
-int search(int player)//player1ÊÇÎÒ£¬player2ÊÇµĞ·½£¬searchº¯ÊıµÄ¹¦ÄÜÊÇ°ÑÄ³Ò»·½µÄËùÓĞ¿É×ßÑ¡Ôñ·ÅÔÚallcommand[]Êı×éÀï£¬²¢·µ»Ø ¿É×ßÑ¡ÔñµÄ¸öÊı 
+int search(int player)//player1æ˜¯æˆ‘ï¼Œplayer2æ˜¯æ•Œæ–¹ï¼Œsearchå‡½æ•°çš„åŠŸèƒ½æ˜¯æŠŠæŸä¸€æ–¹çš„æ‰€æœ‰å¯èµ°é€‰æ‹©æ”¾åœ¨allcommand[]æ•°ç»„é‡Œï¼Œå¹¶è¿”å› å¯èµ°é€‰æ‹©çš„ä¸ªæ•° 
 {
 	int t;
 	if(player==1)
@@ -351,7 +351,7 @@ float value(char currentboard[BOARD_SIZE][BOARD_SIZE])
 	return valuation;
 }
 
-struct Command minimax()//¼«´ó¼«Ğ¡ 
+struct Command minimax()//æå¤§æå° 
 {
 	int alpha=-10000;
 	int beta=10000;
@@ -379,14 +379,14 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 	struct Command allmycommand4[20];
 	struct Command allenemycommand5[20];
 	struct Command allmycommand6[20];
-	//¼«´ó¼«Ğ¡¿ªÊ¼
+	//æå¤§æå°å¼€å§‹
 	cpyboard(tempboard0,board);
 	cpynumFlag(0,1);
 	numstep[0]=search(1);
 	int maxvaluation0=-10000;
 	for(int t=0;t<numstep[0];t++) 
 		allmycommand0[t]=allcommand[t];
-	for(int step0=0;step0<numstep[0];step0++)//µÚÒ»²ã 
+	for(int step0=0;step0<numstep[0];step0++)//ç¬¬ä¸€å±‚ 
 	{
 		place(allmycommand0[step0]);
 		cpyboard(tempboard1,board);
@@ -395,7 +395,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 		int minvaluation1=10000;
 		for(int t=0;t<numstep[1];t++)
 			allenemycommand1[t]=allcommand[t];
-		for(int step1=0;step1<numstep[1];step1++)//µÚ¶ş²ã 
+		for(int step1=0;step1<numstep[1];step1++)//ç¬¬äºŒå±‚ 
 		{
 			place(allenemycommand1[step1]);
 			cpyboard(tempboard2,board);
@@ -404,7 +404,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 			int maxvaluation2=-10000;
 			for(int t=0;t<numstep[2];t++)
 				allmycommand2[t]=allcommand[t];
-			for(int step2=0;step2<numstep[2];step2++)//µÚÈı²ã 
+			for(int step2=0;step2<numstep[2];step2++)//ç¬¬ä¸‰å±‚ 
 			{
 				place(allmycommand2[step2]);
 				cpyboard(tempboard3,board);
@@ -413,7 +413,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 				int minvaluation3=10000;
 				for(int t=0;t<numstep[3];t++)
 					allenemycommand3[t]=allcommand[t];
-				for(int step3=0;step3<numstep[3];step3++)//µÚËÄ²ã 
+				for(int step3=0;step3<numstep[3];step3++)//ç¬¬å››å±‚ 
 				{
 					place(allenemycommand3[step3]);
 					cpyboard(tempboard4,board);
@@ -422,7 +422,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 					int maxvaluation4=-10000;
 					for(int t=0;t<numstep[4];t++)
 						allmycommand4[t]=allcommand[t];
-					for(int step4=0;step4<numstep[4];step4++)//µÚÎå²ã 
+					for(int step4=0;step4<numstep[4];step4++)//ç¬¬äº”å±‚ 
 					{
 						place(allmycommand4[step4]);
 						cpyboard(tempboard5,board);
@@ -431,7 +431,7 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 						int minvaluation5=10000;
 						for(int t=0;t<numstep[5];t++)
 							allenemycommand5[t]=allcommand[t];
-						for(int step5=0;step5<numstep[5];step5++)//µÚÁù²ã 
+						for(int step5=0;step5<numstep[5];step5++)//ç¬¬å…­å±‚ 
 						{
 							place(allenemycommand5[step5]);
 							cpyboard(tempboard6,board);
@@ -440,14 +440,14 @@ struct Command minimax()//¼«´ó¼«Ğ¡
 							int maxvaluation6=-10000;
 							for(int t=0;t<numstep[6];t++)
 								allmycommand6[t]=allcommand[t];
-							for(int step6=0;step6<numstep[6];step6++)//µÚÆß²ã
+							for(int step6=0;step6<numstep[6];step6++)//ç¬¬ä¸ƒå±‚
 							{
 								place(allmycommand6[step6]);
 								cpyboard(tempboard7,board);
 								cpynumFlag(7,1);
 								numstep[7]=search(2);
 								int minvaluation7=10000;
-								for(int step7=0;step7<numstep[7];step7++)//µÚ°Ë²ã 
+								for(int step7=0;step7<numstep[7];step7++)//ç¬¬å…«å±‚ 
 								{
 									place(allcommand[step7]);
 									if(value(board)<minvaluation7)
