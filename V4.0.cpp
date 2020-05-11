@@ -204,16 +204,16 @@ void place(struct Command cmd)
 
 /**
  * YOUR CODE BEGIN
- * ÄãµÄ´úÂë¿ªÊ¼
+ * ä½ çš„ä»£ç å¼€å§‹
  */
 
 /**
  * You can define your own struct and variable here
- * Äã¿ÉÒÔÔÚÕâÀï¶¨ÒåÄã×Ô¼ºµÄ½á¹¹ÌåºÍ±äÁ¿
+ * ä½ å¯ä»¥åœ¨è¿™é‡Œå®šä¹‰ä½ è‡ªå·±çš„ç»“æž„ä½“å’Œå˜é‡
  */
 
 /**
- * Äã¿ÉÒÔÔÚÕâÀï³õÊ¼»¯ÄãµÄAI
+ * ä½ å¯ä»¥åœ¨è¿™é‡Œåˆå§‹åŒ–ä½ çš„AI
  */
  
 void serachjump()
@@ -241,16 +241,16 @@ void initAI(int me)
 }
 
 /**
- * ÂÖµ½ÄãÂä×Ó¡£
- * ÆåÅÌÉÏ0±íÊ¾¿Õ°×£¬1±íÊ¾ºÚÆå£¬2±íÊ¾°×Æì
- * me±íÊ¾ÄãËù´ú±íµÄÆå×Ó(1»ò2)
- * ÄãÐèÒª·µ»ØÒ»¸ö½á¹¹ÌåCommand£¬ÆäÖÐnumStepÊÇÄãÒªÒÆ¶¯µÄÆå×Ó¾­¹ýµÄ¸ñ×ÓÊý£¨º¬Æðµã¡¢ÖÕµã£©£¬
- * x¡¢y·Ö±ðÊÇ¸ÃÆå×ÓÒÀ´Î¾­¹ýµÄÃ¿¸ö¸ñ×ÓµÄºá¡¢×Ý×ø±ê
+ * è½®åˆ°ä½ è½å­ã€‚
+ * æ£‹ç›˜ä¸Š0è¡¨ç¤ºç©ºç™½ï¼Œ1è¡¨ç¤ºé»‘æ£‹ï¼Œ2è¡¨ç¤ºç™½æ——
+ * meè¡¨ç¤ºä½ æ‰€ä»£è¡¨çš„æ£‹å­(1æˆ–2)
+ * ä½ éœ€è¦è¿”å›žä¸€ä¸ªç»“æž„ä½“Commandï¼Œå…¶ä¸­numStepæ˜¯ä½ è¦ç§»åŠ¨çš„æ£‹å­ç»è¿‡çš„æ ¼å­æ•°ï¼ˆå«èµ·ç‚¹ã€ç»ˆç‚¹ï¼‰ï¼Œ
+ * xã€yåˆ†åˆ«æ˜¯è¯¥æ£‹å­ä¾æ¬¡ç»è¿‡çš„æ¯ä¸ªæ ¼å­çš„æ¨ªã€çºµåæ ‡
  */
 struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 {
     /*
-     * TODO£ºÔÚÕâÀïÐ´ÏÂÄãµÄAI¡£
+     * TODOï¼šåœ¨è¿™é‡Œå†™ä¸‹ä½ çš„AIã€‚
      */
     serachjump();
     if(command.numStep==0)
@@ -273,7 +273,7 @@ struct Command aiTurn(const char board[BOARD_SIZE][BOARD_SIZE], int me)
 }
 
 /**
- * ÄãµÄ´úÂë½áÊø
+ * ä½ çš„ä»£ç ç»“æŸ
  */
 
 //.X.X.X.X
